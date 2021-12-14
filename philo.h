@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/13 15:10:21 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:07:30 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 /* Libraries */
 # include <stdio.h>
-# include <pthread.h>
+# include <pthread.h> // for threads
+# include <string.h> // for memset
+# include <unistd.h> // for usleep
+# include <sys/time.h> // for gettimeofday
 
 #endif
