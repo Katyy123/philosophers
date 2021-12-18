@@ -6,24 +6,13 @@
 #    By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/11 15:44:51 by cfiliber          #+#    #+#              #
-#    Updated: 2021/12/11 15:56:53 by cfiliber         ###   ########.fr        #
+#    Updated: 2021/12/18 15:54:29 by cfiliber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = $(MAIN_SRC) $(SRC_GNL) $(SRC_MAP) $(SRC_GAME)
-
-MAIN_SRC = main.c errors.c
-
-GNL = get_next_line.c get_next_line_utils.c
-SRC_GNL = $(addprefix gnl/, $(GNL))
-
-MAP = map_reader.c map_checker.c map_checker_2.c map_utils.c tile_map_gen.c
-SRC_MAP = $(addprefix map/, $(MAP))
-
-GAME = game_init.c input.c render.c end_program.c
-SRC_GAME = $(addprefix game/, $(GAME))
+SRCS = learning.c
 
 OBJS = $(SRCS:.c=.o)
 
