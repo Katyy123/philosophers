@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 19:23:44 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/19 17:12:05 by cfiliber         ###   ########.fr       */
+/*   Created: 2021/12/19 17:09:00 by cfiliber          #+#    #+#             */
+/*   Updated: 2021/12/19 17:09:57 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+int	error(char *message)
 {
-	if (argc != 5 && argc != 6)
-	{
-		return (error("bad arguments"));
-	}
-	else
-	{
-		
-	}
+	printf("\x1b[31m""Error:\n%s\n""\x1b[0m", message);
+	return (0);
+}
+
+void	*null_error(char *message)
+{
+	printf("\x1b[31m""Error:\n%s\n""\x1b[0m", message);
+	return (NULL);
 }
