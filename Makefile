@@ -6,19 +6,19 @@
 #    By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/11 15:44:51 by cfiliber          #+#    #+#              #
-#    Updated: 2021/12/18 15:54:29 by cfiliber         ###   ########.fr        #
+#    Updated: 2021/12/20 18:39:59 by cfiliber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = learning.c
+SRCS = main.c parsing.c init.c utils.c errors.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-fsanitize=thread
 
 GREEN = '\x1b[32m'
 YELLOW = '\x1b[33m'
@@ -37,7 +37,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo $(GREEN)$(CURSIVE)"\nAll files have been compiled"$(RESET)
-	@echo $(MAGENTA)$(CURSIVE)"\nType instructions to run the program\n"$(RESET)
+	@echo $(MAGENTA)$(CURSIVE)"\nType ./philo nb_philos time_die time_eat time_sleep times_must_eat\n"$(RESET)
 
 clean:
 	rm -f $(OBJS)

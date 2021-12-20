@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/18 19:23:44 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/20 19:25:54 by cfiliber         ###   ########.fr       */
+/*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
+/*   Updated: 2021/12/20 17:10:06 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	set_data_struct(int num, t_data *data, int arg_nb)
 {
-	//t_data data;
-	
-	if (argc != 5 && argc != 6)
-		return (error("invalid number of arguments"));
-	else
-	{
-		if (!parsing(argc))
-			return(-1);
-	}
-	printf("%s", argv[1]);
+	if (arg_nb == 1)
+		data->nb_philos = num;
+	if (arg_nb == 2)
+		data->time_die = num;
+	if (arg_nb == 3)
+		data->time_eat = num;
+	if (arg_nb == 4)
+		data->time_sleep = num;
+	if (arg_nb == 5)
+		data->times_must_eat = num;
 }
