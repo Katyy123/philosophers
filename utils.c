@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 15:58:50 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/20 19:20:48 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/21 16:21:48 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	ft_atoi(const char *str, int *is_toobig)
 	while (str[i] >= 48 && str[i] <= 57)
 	{
 		if (((2147483647 - (str[i] - 48)) / 10 < num))
-			is_toobig[0] = TRUE;
+			*is_toobig = TRUE;
 		else
-			is_toobig[0] = FALSE;
+			*is_toobig = FALSE;
 		num = num * 10 + (str[i] - 48);
 		i++;
 	}
@@ -38,7 +38,6 @@ int	ft_isdigit(char *str)
 
 	i = 0;
 	flag = 0;
-	printf("Str in ft_digit: %s", str);//togli
 	while (str[i] >= 48 && str[i] <= 57)
 	{
 		flag = 1;
