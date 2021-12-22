@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/22 13:47:06 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/22 16:37:14 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,14 @@ int	set_data_2(t_data *data)
 {
 	if (data->philos_nb > 200)
 		return (error("too many philosophers"));
+	if (data->time_die < 60 || data->time_eat < 60 || data->time_sleep < 60)
+		return (error("philosophers need more time to do that"));
 	data->dead_philo = FALSE;
 	data->all_ate = FALSE;
 	if (pthread_mutex_init(&data->print, NULL) != 0)
 		return (error("print mutex initialization failed"));
+	if (pthread_mutex_init(&data->death, NULL) != 0)
+		return (error("death mutex initialization failed"));
 	data->philos_array = malloc(sizeof(t_philo) * data->philos_nb);
 	if (!data->philos_array)
 		return (error("philos_array malloc failed"));
@@ -71,9 +75,4 @@ void	set_data_1(int num, t_data *data, int arg_nb)
 	}
 	else if (arg_nb == 5)
 		data->times_must_eat = num;
-	//printf("nb_philos: %d\n", data->nb_philos);
-	//printf("time_die: %d\n", data->time_die);
-	//printf("time_eat: %d\n", data->time_eat);
-	//printf("time_sleep: %d\n", data->time_sleep);
-	//printf("times_must_eat: %d\n", data->times_must_eat);
 }

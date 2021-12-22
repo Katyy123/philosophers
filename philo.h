@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/22 13:31:02 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/22 16:36:15 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_data
 	t_bool			dead_philo;
 	t_bool			all_ate;
 	pthread_mutex_t	print;
+	pthread_mutex_t	death;
 	t_philo			*philos_array;
 }	t_data;
 
