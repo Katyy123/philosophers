@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/22 16:36:15 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:18:20 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data
 	pthread_mutex_t	print;
 	pthread_mutex_t	death;
 	t_philo			*philos_array;
+	long long		start_time;
 }	t_data;
 
 /* main.c */
