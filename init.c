@@ -6,25 +6,24 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/21 19:29:18 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:47:06 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_mutex(t_data *data, t_philo *philo)//forse va aggiunto un altro mutex
+int	set_philo(t_philo *philo, int i, t_data *data)
 {
-	if (pthread_mutex_init(&data->print, NULL) != 0)
-		return (error("print mutex initialization failed"));
-	if (pthread_mutex_init(&philo->left_fork, NULL) != 0)
-		return (error("left_fork mutex initialization failed"));
-	return (1);
-}
-
-void	set_philo(t_philo *philo, int i)//finire di inizializzare
-{
+	philo->id = i;
 	philo->meals_nb = 0;
 	philo->last_meal_time = -1;
+	if (pthread_mutex_init(&philo->right_fork, NULL) != 0)
+		return (error("left_fork mutex initialization failed"));
+	if (i != data->philos_nb - 1)
+		philo->left_fork = &data->philos_array[i + 1].right_fork;
+	else
+		philo->left_fork = &data->philos_array[0].right_fork;
+	return (1);
 }
 
 int	set_data_2(t_data *data)
@@ -33,21 +32,28 @@ int	set_data_2(t_data *data)
 		return (error("too many philosophers"));
 	data->dead_philo = FALSE;
 	data->all_ate = FALSE;
+	if (pthread_mutex_init(&data->print, NULL) != 0)
+		return (error("print mutex initialization failed"));
+	data->philos_array = malloc(sizeof(t_philo) * data->philos_nb);
+	if (!data->philos_array)
+		return (error("philos_array malloc failed"));
 	return (1);
 }
 
-int	init(t_data *data, t_philo *philo)//creare un array di variabili t_philo e inserire in data il pointer
+int	init(t_data *data)
 {
 	int	i;
 	
-	set_data_2(data);
+	if (!set_data_2(data))
+		return (0);
 	i = 0;
 	while (i < data->philos_nb)
 	{
-		set_philo(philo, i);
+		if (!set_philo(&data->philos_array[i], i, data))
+			return (0);
+		i++;
 	}
-	if(!init_mutex(data, philo))
-		return (0);
+	return (1);
 }
 
 void	set_data_1(int num, t_data *data, int arg_nb)

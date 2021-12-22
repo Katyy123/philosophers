@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 15:35:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/21 18:59:09 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/22 12:58:13 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parsing(int argc, char **argv, t_data *data)
 		num = ft_atoi(argv[i], is_toobig);
 		if (!check_num(num, is_toobig))
 			return (0);
-		set_data_struct_1(num, data, i);
+		set_data_1(num, data, i);
 		i++;
 	}
 	return (1);
