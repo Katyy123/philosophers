@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/22 19:18:20 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/23 18:27:06 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ typedef enum e_bool
 	FALSE = 0
 }	t_bool;
 
+/* Status of philosophers */
+typedef enum e_status
+{
+	RIGHT_FORK = 1,
+	LEFT_FORK = 2,
+	EAT = 3,
+	SLEEP = 4,
+	THINK = 5,
+	DIE = 6
+}	t_status;
+
+/* Specific data for every philosopher */
 typedef struct s_philo
 {
 	int				id;
@@ -37,6 +49,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	int				meals_nb;
 	long long		last_meal_time;
+	t_data			*data;
 }	t_philo;
 
 /* Data in common for all philosophers */
@@ -67,6 +80,10 @@ int		set_data_2(t_data *data);
 int		init(t_data *data);
 int		set_philo(t_philo *philo, int i, t_data *data);
 int		init_mutex(t_data *data);
+
+/* thread.c */
+
+/* thread_utils.c */
 
 /* utils.c */
 int		ft_isdigit(char *str);

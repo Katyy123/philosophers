@@ -6,7 +6,7 @@
 #    By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/11 15:44:51 by cfiliber          #+#    #+#              #
-#    Updated: 2021/12/22 13:47:51 by cfiliber         ###   ########.fr        #
+#    Updated: 2021/12/23 19:25:16 by cfiliber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,10 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-fsanitize=thread
 
+RED = '\x1b[31m'
 GREEN = '\x1b[32m'
 YELLOW = '\x1b[33m'
-RED = '\x1b[31m'
+BLUE = '\x1b[0;34m'
 MAGENTA = '\x1b[35m'
 CYAN = '\x1b[36m'
 GRAY = '\x1b[2;37m'

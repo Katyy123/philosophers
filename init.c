@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/22 16:37:14 by cfiliber         ###   ########.fr       */
+/*   Updated: 2021/12/23 18:28:56 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int	set_philo(t_philo *philo, int i, t_data *data)
 {
 	philo->id = i;
-	philo->meals_nb = 0;
-	philo->last_meal_time = -1;
 	if (pthread_mutex_init(&philo->right_fork, NULL) != 0)
 		return (error("left_fork mutex initialization failed"));
 	if (i != data->philos_nb - 1)
 		philo->left_fork = &data->philos_array[i + 1].right_fork;
 	else
 		philo->left_fork = &data->philos_array[0].right_fork;
+	philo->meals_nb = 0;
+	philo->last_meal_time = -1;
+	philo->data = data;
 	return (1);
 }
 
