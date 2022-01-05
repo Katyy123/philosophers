@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/23 18:27:06 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/05 16:01:59 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	int				meals_nb;
 	long long		last_meal_time;
-	t_data			*data;
+	struct s_data	*data;
 }	t_philo;
 
 /* Data in common for all philosophers */
@@ -69,27 +69,36 @@ typedef struct s_data
 }	t_data;
 
 /* main.c */
-int		main(int argc, char **argv);
+int			main(int argc, char **argv);
 
 /* parsing.c */
-int		parsing(int argc, char **argv, t_data *data);
+int			parsing(int argc, char **argv, t_data *data);
+int			ft_is_toobig(int *is_toobig);
+int			check_num(int num, int *is_toobig);
 
 /* init.c */
-void	set_data_1(int num, t_data *data, int arg_nb);
-int		set_data_2(t_data *data);
-int		init(t_data *data);
-int		set_philo(t_philo *philo, int i, t_data *data);
-int		init_mutex(t_data *data);
+void		set_data_1(int num, t_data *data, int arg_nb);
+int			set_data_2(t_data *data);
+int			init(t_data *data);
+int			set_philo(t_philo *philo, int i, t_data *data);
 
 /* thread.c */
+void		*thread(void *void_philo);
+int			create_threads(t_data *data, t_philo *phil_arr);
 
 /* thread_utils.c */
+int			ft_print(t_data *data, int philo_id, t_status status);
+int			death_check(t_data *data);
+long long	time_diff(long long start, long long end);
+long long	ft_get_time(void);
+void		ft_usleep(long long time);
 
 /* utils.c */
-int		ft_isdigit(char *str);
-int		ft_atoi(const char *str, int *is_toobig);
+int			ft_isdigit(char *str);
+int			ft_atoi(const char *str, int *is_toobig);
 
 /* errors.c */
-int		error(char *message);
-void	*null_error(char *message);
+int			error(char *message);
+void		*null_error(char *message);
+int			error_thread(char *message, int philo_id);
 #endif

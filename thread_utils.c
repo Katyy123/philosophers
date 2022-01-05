@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:24:59 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/23 19:04:56 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/05 16:03:58 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_print(t_data *data, int philo_id, t_status status)
 	return (1);
 }
 
-death_check(t_data *data)
+int	death_check(t_data *data)
 {
 	int	i;
 	t_philo philo;
