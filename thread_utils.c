@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:24:59 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/05 16:03:58 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:34:55 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_print(t_data *data, int philo_id, t_status status)
 	if (pthread_mutex_lock(&data->print) != 0)
 		return (error_thread("print mutex lock failed", philo_id));
 	printf("%lli Philo %d ", ft_get_time() - data->start_time, philo_id);
-	if (status == RIGHT_FORK || status == LEFT_FORK)
+	if (status == FORK)
 		printf("has taken a fork\n");
 	if (status == EAT)
 		printf("\x1b[33m""is eating/n""\x1b[0m");

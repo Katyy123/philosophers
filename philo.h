@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/05 16:01:59 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:28:28 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ typedef enum e_bool
 /* Status of philosophers */
 typedef enum e_status
 {
-	RIGHT_FORK = 1,
-	LEFT_FORK = 2,
-	EAT = 3,
-	SLEEP = 4,
-	THINK = 5,
-	DIE = 6
+	FORK = 1,
+	EAT = 2,
+	SLEEP = 3,
+	THINK = 4,
+	DIE = 5,
 }	t_status;
 
 /* Specific data for every philosopher */
