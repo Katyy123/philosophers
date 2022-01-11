@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:24:59 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/05 18:34:55 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:52:22 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ int	ft_print(t_data *data, int philo_id, t_status status)
 	return (1);
 }
 
-int	death_check(t_data *data)
+
+
+/*
+int	death_check(t_data *data)//controlla se è passato troppo tempo dall'ultimo pasto
 {
 	int	i;
 	t_philo philo;
 	
 	i = 0;
 }
+*/
 
 long long	time_diff(long long start, long long end)
 {
