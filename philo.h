@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/11 19:07:31 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:43:59 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_data
 	pthread_mutex_t	death;
 	t_philo			*philos_array;
 	long long		start_time;
-	int				id_death_thread;
+	//int				id_death_thread;
 }	t_data;
 
 /* main.c */
@@ -87,8 +87,8 @@ void		*thread(void *void_philo);
 int			create_threads(t_data *data, t_philo *phil_arr);
 
 /* thread_utils.c */
-int			ft_print(t_data *data, int philo_id, t_status status);
-int			death_check(t_data *data);
+int			print_status(t_data *data, int philo_id, t_status status);
+//int			death_check(t_data *data);
 long long	time_diff(long long start, long long end);
 long long	ft_get_time(void);
 void		ft_usleep(long long time);
@@ -99,6 +99,6 @@ int			ft_atoi(const char *str, int *is_toobig);
 
 /* errors.c */
 int			error(char *message);
-void		*null_error(char *message);
-int			error_thread(char *message, int philo_id);
+void		*null_error(char *message, t_data *data);
+int			error_thread(char *message, int philo_id, t_data *data);
 #endif
