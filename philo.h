@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/12 19:43:59 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:05:51 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,28 @@ typedef struct s_philo
 	int				thread_id;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*left_fork;
-	int				meals_nb;
+	int				meals_nb;//number of meals
 	long long		last_meal_time;
 	struct s_data	*data;
+	int				death_thread_id;
+	t_bool			finish;//1 when a philo ate m_eat times, if not, 0
 }	t_philo;
 
 /* Data in common for all philosophers */
 typedef struct s_data
 {
 	int				philos_nb;
-	int				time_die;
+	int				time_die;//time to die
 	int				time_eat;
 	int				time_sleep;
 	int				times_must_eat;
-	t_bool			dead_philo;
-	t_bool			all_ate;
+	t_bool			dead_philo;//TRUE if 1 philo dies
+	t_bool			all_ate;//inizializzare
+	int				nb_philos_ate;//inizializzare //numero di philos che hanno mangiato times_must_eat times
 	pthread_mutex_t	print;
-	pthread_mutex_t	death;
+	pthread_mutex_t	death_meal;//correggere inizializzazione
 	t_philo			*philos_array;
 	long long		start_time;
-	//int				id_death_thread;
 }	t_data;
 
 /* main.c */
@@ -83,7 +85,7 @@ int			init(t_data *data);
 int			set_philo(t_philo *philo, int i, t_data *data);
 
 /* thread.c */
-void		*thread(void *void_philo);
+int			*thread(void *void_philo);
 int			create_threads(t_data *data, t_philo *phil_arr);
 
 /* thread_utils.c */
@@ -91,7 +93,7 @@ int			print_status(t_data *data, int philo_id, t_status status);
 //int			death_check(t_data *data);
 long long	time_diff(long long start, long long end);
 long long	ft_get_time(void);
-void		ft_usleep(long long time);
+void		ft_usleep(long long time_in_ms, t_data *data);
 
 /* utils.c */
 int			ft_isdigit(char *str);

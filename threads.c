@@ -6,48 +6,37 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:09:53 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/12 19:48:24 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:11:36 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	death_check(t_philo *philo)
+int	death_check(t_philo *philo)
 {
 	t_data *data;
 	
 	data = philo->data;//l'indice dell'array è indifferente
 	while (data->dead_philo == FALSE && data->all_ate == FALSE)
 	{
-		ft_usleep(1);//serve per non far andare la funzione di continuo
-		while (data->dead_philo == FALSE)
+		if (ft_get_time() - philo->last_meal_time >= data->time_die)
 		{
-			if (ft_get_time() - philo->last_meal_time >= data->time_die)
+			if (pthread_mutex_lock(&data->death_meal))
 			{
-				pthread_mutex_lock(&data->death);
-				data->dead_philo = TRUE;
-				print_status(data, philo->id, DIE);
-				pthread_mutex_unlock(&data->death);
-			}	
+				error_thread("death mutex lock failed", philo->id, data);
+				pthread_exit(0);
+			}
+			if (print_status(data, philo->id, DIE))
+				pthread_exit(0);
+			data->dead_philo = TRUE;
+			//il mutex death_meal non deve essere sbloccato se è morto un philo
+			pthread_exit(1);
 		}
+		ft_sleep(1, data);//serve per non far andare la funzione di continuo
 	}
 }
 
-int	eat(t_philo *philo)
-{
-	t_data	*data;
-	data = philo->data;
-	if (pthread_mutex_lock(&philo->right_fork) != 0)
-		return (error_thread("right fork mutex lock failed", philo->id, data));
-	print_status(data, philo->id, FORK);
-	if (pthread_mutex_lock(philo->left_fork) != 0)
-		return (error_thread("left fork mutex lock failed", philo->id, data));
-	print_status(data, philo->id, FORK);
-	//confronta last_meal_time con time_die
-	return (1);
-}
-
-void	*thread(void *void_philo)
+int	*thread(void *void_philo)
 {
 	t_data 	*data;
 	t_philo *philo;
@@ -55,17 +44,23 @@ void	*thread(void *void_philo)
 	
 	philo = (t_philo *)void_philo;
 	data = philo->data;
-	if (pthread_create(&id_death_thread, NULL, death_check, philo))
-		return (error_mutex("death pthread_create failed", data));
 	if (philo->id % 2 != 0)//se l'ID di philo non è pari (conto philos da 0), aspetta a mangiare
-		ft_usleep(data->time_eat / 10);
+		ft_sleep(data->time_eat / 10, data);
 	while (!data->dead_philo)//continuare
 	{
-		eat(philo);
+		if (pthread_create(&id_death_thread, NULL, death_check, philo))
+		{
+			error_mutex("death pthread_create failed", data);
+			pthread_exit(0);
+		}
+		activity(philo, data);
+		if (pthread_detach(id_death_thread) != 0)//oppure pthread_join, vedi
+		{
+			error_thread("death pthread_join failed", philo->id, data);
+			pthread_exit(0);
+		}
 	}
-	//continuare
-	if (pthread_detach(id_death_thread) != 0)//oppure pthread_join, vedi
-		error_thread("death pthread_join failed", philo->id, data);
+	pthread_exit(1);
 }
 
 int	create_threads(t_data *data, t_philo *phil_arr)

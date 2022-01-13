@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/23 18:28:56 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/13 16:25:31 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	set_data_2(t_data *data)
 	if (data->time_die < 60 || data->time_eat < 60 || data->time_sleep < 60)
 		return (error("philosophers need more time to do that"));
 	data->dead_philo = FALSE;
-	data->all_ate = FALSE;
+	data->philos_ate = 0;
 	if (pthread_mutex_init(&data->print, NULL) != 0)
 		return (error("print mutex initialization failed"));
 	if (pthread_mutex_init(&data->death, NULL) != 0)
