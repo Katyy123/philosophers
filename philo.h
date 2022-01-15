@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/13 19:05:51 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:40:37 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_data
 	t_bool			all_ate;//inizializzare
 	int				nb_philos_ate;//inizializzare //numero di philos che hanno mangiato times_must_eat times
 	pthread_mutex_t	print;
-	pthread_mutex_t	death_meal;//correggere inizializzazione
+	pthread_mutex_t	death_meal;//correggere inizializzazione //potrebbe essere non necessario
 	t_philo			*philos_array;
 	long long		start_time;
 }	t_data;
@@ -75,25 +75,34 @@ int			main(int argc, char **argv);
 
 /* parsing.c */
 int			parsing(int argc, char **argv, t_data *data);
-int			ft_is_toobig(int *is_toobig);
 int			check_num(int num, int *is_toobig);
+int			ft_is_toobig(int *is_toobig);
 
 /* init.c */
 void		set_data_1(int num, t_data *data, int arg_nb);
-int			set_data_2(t_data *data);
 int			init(t_data *data);
+int			set_data_2(t_data *data);
 int			set_philo(t_philo *philo, int i, t_data *data);
 
 /* thread.c */
-int			*thread(void *void_philo);
 int			create_threads(t_data *data, t_philo *phil_arr);
+void		*thread(void *void_philo);
+void		death_check(t_philo *philo);
+
+/* philos_activity.c */
+int			activity(t_philo *philo, t_data *data);
+int			ft_eat(t_philo *philo);
+void		all_ate_check(t_data *data, t_philo *phil_arr);
 
 /* thread_utils.c */
-int			print_status(t_data *data, int philo_id, t_status status);
-//int			death_check(t_data *data);
-long long	time_diff(long long start, long long end);
+void		ft_sleep(long long time_in_ms, t_data *data);
 long long	ft_get_time(void);
-void		ft_usleep(long long time_in_ms, t_data *data);
+//long long	time_diff(long long start, long long end);
+int			print_status(t_data *data, int philo_id, t_status status);
+
+/* end.c */
+int			end(t_data *data, t_philo *philos_arr);
+int			destroy_mutexes(t_data *data, t_philo *philo_arr);
 
 /* utils.c */
 int			ft_isdigit(char *str);
@@ -101,6 +110,6 @@ int			ft_atoi(const char *str, int *is_toobig);
 
 /* errors.c */
 int			error(char *message);
-void		*null_error(char *message, t_data *data);
 int			error_thread(char *message, int philo_id, t_data *data);
+int			error_mutex(char *message, t_data *data);
 #endif

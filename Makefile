@@ -6,19 +6,27 @@
 #    By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/11 15:44:51 by cfiliber          #+#    #+#              #
-#    Updated: 2021/12/23 19:25:16 by cfiliber         ###   ########.fr        #
+#    Updated: 2022/01/15 15:45:07 by cfiliber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-SRCS = main.c parsing.c init.c utils.c errors.c
+SRCS = main.c \
+	parsing.c \
+	init.c \
+	thread.c \
+	philos_acticity.c \
+	thread_utils.c \
+	end.c \
+	utils.c \
+	errors.c \
 
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-fsanitize=thread
 
 RED = '\x1b[31m'
 GREEN = '\x1b[32m'

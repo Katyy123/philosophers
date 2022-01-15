@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:16:48 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/13 19:47:03 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:22:18 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_eat(t_philo *philo)
 	if (pthread_mutex_lock(philo->left_fork) != 0)
 		return (error_thread("l_fork mutex lock failed", philo->id, data));
 	print_status(data, philo->id, FORK);
-	if (pthread_mutex_lock(&data->death_meal))
+	if (pthread_mutex_lock(&data->death_meal))//potrebbe essere non necessario questo mutex
 		return (error_thread("death mutex lock failed", philo->id, data));
 	print_status(data, philo, EAT);
 	philo->last_meal_time = ft_get_time();
@@ -49,7 +49,10 @@ int	ft_eat(t_philo *philo)
 	ft_sleep(data->time_eat, data);
 	philo->meals_nb++;
 	if (philo->meals_nb == data->times_must_eat)
+	{
 		philo->finish = TRUE;
+		data->nb_philos_ate++;
+	}
 	if (pthread_mutex_unlock(&philo->right_fork))
 		return (error_thread("r_fork mutex unlock failed", philo->id, data));
 	if (pthread_mutex_unlock(philo->left_fork))
@@ -66,7 +69,7 @@ int	activity(t_philo *philo, t_data *data)
 				return (0);
 		all_ate_check(data, data->philos_array);
 		if (data->all_ate == TRUE || data->dead_philo == TRUE)
-			return (0);
+			return (1);
 		if (!print_status(data, philo, SLEEP))
 			return (0);
 		ft_sleep(data->time_sleep, data);

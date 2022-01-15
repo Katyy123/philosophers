@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 14:06:09 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/12 19:45:38 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:32:02 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	destroy_mutexes(t_data *data, t_philo *philo_arr)//controlla che tutti i mut
 		}
 		i++;
 	}
-	if (pthread_mutex_destroy(&data->death) != 0)
+	if (pthread_mutex_destroy(&data->death_meal) != 0)
 		error_mutex("death mutex destroy failed", data);
 	if (pthread_mutex_destroy(&data->print) != 0)
 		error("print mutex destroy failed");

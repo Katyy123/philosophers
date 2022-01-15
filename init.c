@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/13 16:25:31 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:26:06 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	set_philo(t_philo *philo, int i, t_data *data)
 	philo->meals_nb = 0;
 	philo->last_meal_time = -1;
 	philo->data = data;
+	philo->finish = FALSE;
 	return (1);
 }
 
@@ -34,10 +35,11 @@ int	set_data_2(t_data *data)
 	if (data->time_die < 60 || data->time_eat < 60 || data->time_sleep < 60)
 		return (error("philosophers need more time to do that"));
 	data->dead_philo = FALSE;
-	data->philos_ate = 0;
+	data->all_ate = FALSE;
+	data->nb_philos_ate = 0;
 	if (pthread_mutex_init(&data->print, NULL) != 0)
 		return (error("print mutex initialization failed"));
-	if (pthread_mutex_init(&data->death, NULL) != 0)
+	if (pthread_mutex_init(&data->death_meal, NULL) != 0)
 		return (error("death mutex initialization failed"));
 	data->philos_array = malloc(sizeof(t_philo) * data->philos_nb);
 	if (!data->philos_array)

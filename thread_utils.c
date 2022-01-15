@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:24:59 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/13 19:55:08 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:40:28 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ int	print_status(t_data *data, int philo_id, t_status status)
 		printf("\x1b[32m""is thinking/n""\x1b[0m");
 	if (status == DIE)
 		printf("\x1b[31m""died/n""\x1b[0m");
-	if (pthread_mutex_unlock(&data->print) != 0)
-		return (error_thread("print mutex unlock failed", philo_id, data));
+	//if (status != DIE)//forse non bisogna sbolccare mutex print in caso di morte
+		if (pthread_mutex_unlock(&data->print) != 0)
+			return (error_thread("print mutex unlock failed", philo_id, data));
 	return (1);
 }
 
+/*
 long long	time_diff(long long start, long long end)
 {
 	return (end - start);
 }
+*/
 
 long long	ft_get_time(void)
 {
