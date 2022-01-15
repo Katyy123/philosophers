@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 15:40:37 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 19:54:45 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ typedef enum e_status
 typedef struct s_philo
 {
 	int				id;
-	int				thread_id;
+	pthread_t		thread_id;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*left_fork;
 	int				meals_nb;//number of meals
 	long long		last_meal_time;
 	struct s_data	*data;
-	int				death_thread_id;
+	pthread_t		death_thread_id;
 	t_bool			finish;//1 when a philo ate m_eat times, if not, 0
 }	t_philo;
 
@@ -68,6 +68,7 @@ typedef struct s_data
 	pthread_mutex_t	death_meal;//correggere inizializzazione //potrebbe essere non necessario
 	t_philo			*philos_array;
 	long long		start_time;
+	//pthread_t		death_thread_id;
 }	t_data;
 
 /* main.c */
@@ -87,18 +88,18 @@ int			set_philo(t_philo *philo, int i, t_data *data);
 /* thread.c */
 int			create_threads(t_data *data, t_philo *phil_arr);
 void		*thread(void *void_philo);
-void		death_check(t_philo *philo);
+void		*death_check(void *philo);
 
 /* philos_activity.c */
 int			activity(t_philo *philo, t_data *data);
-int			ft_eat(t_philo *philo);
-void		all_ate_check(t_data *data, t_philo *phil_arr);
+void		ft_eat(t_philo *philo);
+void		all_ate_check(t_data *data);//, t_philo *phil_arr);
 
 /* thread_utils.c */
-void		ft_sleep(long long time_in_ms, t_data *data);
+void		ft_sleep(long long time_in_ms);//, t_data *data);
 long long	ft_get_time(void);
 //long long	time_diff(long long start, long long end);
-int			print_status(t_data *data, int philo_id, t_status status);
+void		print_status(t_data *data, int philo_id, t_status status);
 
 /* end.c */
 int			end(t_data *data, t_philo *philos_arr);

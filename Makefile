@@ -6,7 +6,7 @@
 #    By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/11 15:44:51 by cfiliber          #+#    #+#              #
-#    Updated: 2022/01/15 15:45:07 by cfiliber         ###   ########.fr        #
+#    Updated: 2022/01/15 19:47:44 by cfiliber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = philo
 SRCS = main.c \
 	parsing.c \
 	init.c \
-	thread.c \
-	philos_acticity.c \
+	threads.c \
+	philos_activity.c \
 	thread_utils.c \
 	end.c \
 	utils.c \
