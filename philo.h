@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 19:54:45 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 21:53:49 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_philo
 	struct s_data	*data;
 	pthread_t		death_thread_id;
 	t_bool			finish;//1 when a philo ate m_eat times, if not, 0
+	t_bool			is_dead;
+	pthread_mutex_t	eating;//serve perché se sta mangiando non può morire
 }	t_philo;
 
 /* Data in common for all philosophers */
@@ -113,4 +115,5 @@ int			ft_atoi(const char *str, int *is_toobig);
 int			error(char *message);
 int			error_thread(char *message, int philo_id, t_data *data);
 int			error_mutex(char *message, t_data *data);
+void		*error_thread_null(char *message, int philo_id, t_data *data);
 #endif

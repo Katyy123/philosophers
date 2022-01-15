@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:24:59 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 20:18:36 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 22:22:51 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ void	ft_sleep(long long time_in_ms)//, t_data *data)
 
 	start_time = ft_get_time();
 	while ((ft_get_time() - start_time) < time_in_ms)// && data->dead_philo == FALSE && data->all_ate == FALSE)//non serve aggiungere le ultime 2 condizioni
-		usleep(5);
+		usleep(50);
 }

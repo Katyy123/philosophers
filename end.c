@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 14:06:09 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 20:21:03 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 21:55:22 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int	destroy_mutexes(t_data *data, t_philo *philo_arr)//controlla che tutti i mut
 		if (pthread_mutex_destroy(&philo_arr[i].right_fork) != 0)
 		{
 			error_thread("fork mut_destroy failed", philo_arr[i].id, data);
+			break;
+		}
+		if (pthread_mutex_destroy(&philo_arr[i].eating) != 0)
+		{
+			error_thread("eating mut_destroy failed", philo_arr[i].id, data);
 			break;
 		}
 		i++;
@@ -43,10 +48,10 @@ int	end(t_data *data, t_philo *philos_arr)
 		//error_mutex("death pthread_join failed", data);
 		//return (0);
 	//}
-	if (data->all_ate || data->dead_philo)
-	{
-		exit (1);
-	}
+	//if (data->all_ate || data->dead_philo)
+	//{
+		//exit (1);
+	//}
 	while (i < data->philos_nb)
 	{
 		pthread_join(philos_arr[i].thread_id, NULL);
@@ -56,6 +61,8 @@ int	end(t_data *data, t_philo *philos_arr)
 		//}
 		i++;
 	}
+	if (data->all_ate == TRUE)
+			printf("All philos have eaten %d times\n", data->nb_philos_ate);
 	destroy_mutexes(data, philos_arr);//chiama mutex_destroy per ogni mutex
 	free(philos_arr);
 	return (1);

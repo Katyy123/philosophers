@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:16:48 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 19:55:27 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/15 22:01:56 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(philo->left_fork);
 		//return (error_thread("l_fork mutex lock failed", philo->id, data));
 	print_status(data, philo->id, FORK);
+	pthread_mutex_lock(&philo->eating);
 	pthread_mutex_lock(&data->death_meal);//potrebbe essere non necessario questo mutex
 		//return (error_thread("death mutex lock failed", philo->id, data));
 	print_status(data, philo->id, EAT);
 	philo->last_meal_time = ft_get_time();
+	pthread_mutex_unlock(&philo->eating);
 	pthread_mutex_unlock(&data->death_meal);
 		//return (error_thread("death mutex unlock failed", philo->id, data));
 	ft_sleep(data->time_eat);//, data);
