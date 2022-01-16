@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 21:53:49 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:06:18 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct s_philo
 	long long		last_meal_time;
 	struct s_data	*data;
 	pthread_t		death_thread_id;
-	t_bool			finish;//1 when a philo ate m_eat times, if not, 0
-	t_bool			is_dead;
-	pthread_mutex_t	eating;//serve perché se sta mangiando non può morire
+	t_bool			finish;//TRUE when a philo ate m_eat times, if not, FALSE
+	//t_bool			is_dead;
+	//pthread_mutex_t	eating;//serve perché se sta mangiando non può morire
 }	t_philo;
 
 /* Data in common for all philosophers */
@@ -68,6 +68,8 @@ typedef struct s_data
 	int				nb_philos_ate;//inizializzare //numero di philos che hanno mangiato times_must_eat times
 	pthread_mutex_t	print;
 	pthread_mutex_t	death_meal;//correggere inizializzazione //potrebbe essere non necessario
+	pthread_mutex_t	death_sleep;
+	pthread_mutex_t	death_think;
 	t_philo			*philos_array;
 	long long		start_time;
 	//pthread_t		death_thread_id;

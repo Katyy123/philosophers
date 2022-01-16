@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:09:53 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 22:34:40 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/16 19:17:29 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,41 @@ void	*death_check(void *void_philo)
 	t_data	*data;
 	t_philo	*philo;
 	int		i;
+	int		j;
 	
 	philo = (t_philo *)void_philo;
 	data = philo->data;
 	while (data->dead_philo == FALSE && data->all_ate == FALSE)
 	{
-		pthread_mutex_lock(&philo->eating);
-		pthread_mutex_lock(&data->death_meal);
-		if ((ft_get_time() - philo->last_meal_time) >= data->time_die)
+		i = 0;
+		while (i < data->philos_nb && data->dead_philo == FALSE && data->all_ate == FALSE)
 		{
-			print_status(data, philo->id, DIE);
-			data->dead_philo = TRUE;
-			philo->is_dead = TRUE;
-			i = 0;
-			while (i < data->philos_nb)
+			pthread_mutex_lock(&data->death_meal);
+			if ((ft_get_time() - philo->last_meal_time) >= data->time_die)
 			{
-				pthread_mutex_unlock(&data->philos_array[i].right_fork);
-				i++;
+				if (data->dead_philo == FALSE && data->all_ate == FALSE)
+				{
+					data->dead_philo = TRUE;
+					//philo->is_dead = TRUE;
+					//usleep(500);
+					print_status(data, philo->id, DIE);
+				}
+				j = 0;
+				//pthread_mutex_unlock(&data->death_meal);
+				//pthread_mutex_unlock(&philo->right_fork);
+				while (j < data->philos_nb)
+				{
+					pthread_mutex_unlock(&data->philos_array[j].right_fork);
+					j++;
+				}
+				//usleep(500);
+				//pthread_mutex_unlock(&data->death_meal);//forse il mutex death_meal non deve essere sbloccato se è morto un philo
+				//return (NULL);
 			}
-			usleep(500);
-			//pthread_mutex_unlock(&philo->eating);
-			//pthread_mutex_unlock(&data->death_meal);//forse il mutex death_meal non deve essere sbloccato se è morto un philo
-			//return (NULL);
+			pthread_mutex_unlock(&data->death_meal);
+			usleep(1000);//, data);//serve per non far andare la funzione di continuo
+			i++;
 		}
-		pthread_mutex_unlock(&philo->eating);
-		pthread_mutex_unlock(&data->death_meal);
-		usleep(100);//, data);//serve per non far andare la funzione di continuo
 	}
 	return (NULL);
 }
@@ -61,10 +70,10 @@ void	*thread(void *void_philo)
 	while (data->dead_philo == FALSE)//continuare
 	{
 		//pthread_create(&philo->death_thread_id, NULL, death_check, philo);
-		usleep(500);
+		//usleep(500);
 		activity(philo, data);
 		pthread_detach(philo->death_thread_id);
-		usleep(500);
+		//usleep(500);
 		//if (philo->is_dead == TRUE)
 		//{
 			//print_status(data, philo->id, DIE);

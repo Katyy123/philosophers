@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:16:48 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 22:01:56 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:51:09 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,21 @@ void	ft_eat(t_philo *philo)
 	data = philo->data;
 	pthread_mutex_lock(&philo->right_fork);
 		//return (error_thread("r_fork mutex lock failed", philo->id, data));
-	print_status(data, philo->id, FORK);
+	if (data->all_ate == FALSE && data->dead_philo == FALSE)
+		print_status(data, philo->id, FORK);
 	pthread_mutex_lock(philo->left_fork);
 		//return (error_thread("l_fork mutex lock failed", philo->id, data));
-	print_status(data, philo->id, FORK);
-	pthread_mutex_lock(&philo->eating);
+	if (data->all_ate == FALSE && data->dead_philo == FALSE)
+		print_status(data, philo->id, FORK);
+	//pthread_mutex_lock(&philo->eating);
 	pthread_mutex_lock(&data->death_meal);//potrebbe essere non necessario questo mutex
 		//return (error_thread("death mutex lock failed", philo->id, data));
-	print_status(data, philo->id, EAT);
-	philo->last_meal_time = ft_get_time();
-	pthread_mutex_unlock(&philo->eating);
+	if (data->all_ate == FALSE && data->dead_philo == FALSE)
+	{
+		print_status(data, philo->id, EAT);
+		philo->last_meal_time = ft_get_time();
+	}
+	//pthread_mutex_unlock(&philo->eating);
 	pthread_mutex_unlock(&data->death_meal);
 		//return (error_thread("death mutex unlock failed", philo->id, data));
 	ft_sleep(data->time_eat);//, data);
@@ -64,17 +69,24 @@ void	ft_eat(t_philo *philo)
 
 int	activity(t_philo *philo, t_data *data)
 {
-	if (data->dead_philo == FALSE)
+	if (data->dead_philo == FALSE && data->all_ate == FALSE)
 	{	
 		if (philo->finish == FALSE)
 			ft_eat(philo);
 		all_ate_check(data);//, data->philos_array);
-		if (data->all_ate == TRUE || data->dead_philo == TRUE)
-			return (1);
-		print_status(data, philo->id, SLEEP);
-		ft_sleep(data->time_sleep);//, data);
-		if (data->dead_philo == FALSE)
+		//pthread_mutex_lock(&data->death_sleep);
+		if (data->all_ate == FALSE && data->dead_philo == FALSE)
+		{
+			print_status(data, philo->id, SLEEP);
+			//pthread_mutex_unlock(&data->death_sleep);
+			ft_sleep(data->time_sleep);//, data);
+		}
+		//else
+			//pthread_mutex_unlock(&data->death_sleep);
+		//pthread_mutex_lock(&data->death_think);
+		if (data->dead_philo == FALSE && data->all_ate == FALSE)
 			print_status(data, philo->id, THINK);
+		//pthread_mutex_unlock(&data->death_think);
 	}
 	return (1);		
 }

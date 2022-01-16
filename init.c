@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 21:53:09 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:07:47 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	set_philo(t_philo *philo, int i, t_data *data)
 	philo->last_meal_time = ft_get_time();
 	philo->data = data;
 	philo->finish = FALSE;
-	philo->is_dead = FALSE;
-	if (pthread_mutex_init(&philo->eating, NULL) != 0)
-		return (error("eating mutex initialization failed"));
+	//philo->is_dead = FALSE;
+	//if (pthread_mutex_init(&philo->eating, NULL) != 0)
+		//return (error("eating mutex initialization failed"));
 	return (1);
 }
 
@@ -43,7 +43,11 @@ int	set_data_2(t_data *data)
 	if (pthread_mutex_init(&data->print, NULL) != 0)
 		return (error("print mutex initialization failed"));
 	if (pthread_mutex_init(&data->death_meal, NULL) != 0)
-		return (error("death mutex initialization failed"));
+		return (error("death_meal mutex initialization failed"));
+	if (pthread_mutex_init(&data->death_sleep, NULL) != 0)
+		return (error("death_sleep mutex initialization failed"));
+	if (pthread_mutex_init(&data->death_think, NULL) != 0)
+		return (error("death_think mutex initialization failed"));
 	data->philos_array = malloc(sizeof(t_philo) * data->philos_nb);
 	if (!data->philos_array)
 		return (error("philos_array malloc failed"));

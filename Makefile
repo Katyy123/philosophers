@@ -6,7 +6,7 @@
 #    By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/11 15:44:51 by cfiliber          #+#    #+#              #
-#    Updated: 2022/01/15 19:47:44 by cfiliber         ###   ########.fr        #
+#    Updated: 2022/01/16 17:02:56 by cfiliber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread #-fsanitize=address #-fsanitize=thread
 
 RED = '\x1b[31m'
 GREEN = '\x1b[32m'
