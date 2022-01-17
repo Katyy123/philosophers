@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/16 18:07:47 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:14:10 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	set_philo(t_philo *philo, int i, t_data *data)
 	philo->last_meal_time = ft_get_time();
 	philo->data = data;
 	philo->finish = FALSE;
-	//philo->is_dead = FALSE;
+	philo->is_dead = FALSE;
 	//if (pthread_mutex_init(&philo->eating, NULL) != 0)
 		//return (error("eating mutex initialization failed"));
 	return (1);

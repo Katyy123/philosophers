@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/16 18:06:18 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:13:50 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_philo
 	struct s_data	*data;
 	pthread_t		death_thread_id;
 	t_bool			finish;//TRUE when a philo ate m_eat times, if not, FALSE
-	//t_bool			is_dead;
+	t_bool			is_dead;
 	//pthread_mutex_t	eating;//serve perché se sta mangiando non può morire
 }	t_philo;
 
@@ -100,7 +100,7 @@ void		ft_eat(t_philo *philo);
 void		all_ate_check(t_data *data);//, t_philo *phil_arr);
 
 /* thread_utils.c */
-void		ft_sleep(long long time_in_ms);//, t_data *data);
+void		ft_sleep(long long time_in_ms, t_data *data);
 long long	ft_get_time(void);
 //long long	time_diff(long long start, long long end);
 void		print_status(t_data *data, int philo_id, t_status status);
