@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:23:44 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/12 15:23:10 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:02:31 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int	main(int argc, char **argv)
 			return(-1);
 		if (!init(&data))
 		{
-			free(data.philos_array);
+			free(data.phil_arr);
 			return (-1);
 		}
 		data.start_time = ft_get_time();
-		if (create_threads(&data, data.philos_array) != 0)
+		if (create_threads(&data, data.phil_arr) != 0)
 		{
-			end(&data, data.philos_array);
+			end(&data, data.phil_arr);
 			return (-1);
 		}
-		end(&data, data.philos_array);
+		end(&data, data.phil_arr);
 	}
 	return (0);
 }

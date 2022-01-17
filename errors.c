@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/19 17:09:00 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/15 21:01:27 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:05:33 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	error_mutex(char *message, t_data *data)
 	return (0);
 }
 
-void	*error_thread_null(char *message, int philo_id, t_data *data)
+void	*error_th_null(char *message, int philo_id, t_data *data)
 {
 	pthread_mutex_lock(&data->print);
 	printf("\x1b[31m""Error:\n%s(Philo %d)\n""\x1b[0m", message, philo_id);

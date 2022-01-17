@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:24:59 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 19:22:09 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:12:16 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	print_status(t_data *data, int philo_id, t_status status)
 	pthread_mutex_lock(&data->print);
 	if (data->dead_philo == TRUE)
 		usleep(1000);
-	if (data->dead_philo == FALSE)// && data->all_ate == FALSE)
+	if (data->dead_philo == FALSE)
 	{
-		printf("%lli Philo %d ", ft_get_time() - data->start_time, philo_id + 1);
+		printf("%lli Philo %d ", ft_get_time() - data->start_time,
+			philo_id + 1);
 		if (status == FORK)
 			printf("has taken a fork\n");
 		if (status == EAT)
@@ -47,6 +48,7 @@ void	ft_sleep(long long time_in_ms, t_data *data)
 	long long	start_time;
 
 	start_time = ft_get_time();
-	while ((ft_get_time() - start_time) < time_in_ms && data->dead_philo == FALSE)// && data->all_ate == FALSE)//non serve aggiungere le ultime 2 condizioni
+	while ((ft_get_time() - start_time) < time_in_ms
+		&& data->dead_philo == FALSE)
 		usleep(500);
 }

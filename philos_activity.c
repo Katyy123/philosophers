@@ -6,13 +6,13 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:16:48 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 17:05:27 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:38:19 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	all_ate_check(t_data *data)//, t_philo *phil_arr)
+void	all_ate_check(t_data *data)
 {
 	if (data->nb_philos_ate == data->philos_nb)
 		data->all_ate = TRUE;
@@ -28,20 +28,15 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(philo->left_fork);
 	if (data->all_ate == FALSE && data->dead_philo == FALSE)
 		print_status(data, philo->id, FORK);
-	//pthread_mutex_lock(&philo->eating);
-	pthread_mutex_lock(&data->death_meal);//potrebbe essere non necessario questo mutex
+	pthread_mutex_lock(&data->death_meal);
 	if (data->all_ate == FALSE && data->dead_philo == FALSE)
 	{
 		print_status(data, philo->id, EAT);
 		philo->last_meal_time = ft_get_time();
 	}
-	//pthread_mutex_unlock(&philo->eating);
-	//all_ate_check(data);
 	pthread_mutex_unlock(&data->death_meal);
 	ft_sleep(data->time_eat, data);
 	philo->meals_nb++;
-	//pthread_mutex_unlock(&philo->right_fork);
-	//pthread_mutex_unlock(philo->left_fork);
 	if (philo->meals_nb == data->times_must_eat)
 	{
 		philo->finish = TRUE;
@@ -57,7 +52,7 @@ int	activity(t_philo *philo, t_data *data)
 	{	
 		if (philo->finish == FALSE)
 			ft_eat(philo);
-		all_ate_check(data);//, data->philos_array);
+		all_ate_check(data);
 		if (data->all_ate == FALSE && data->dead_philo == FALSE)
 		{
 			print_status(data, philo->id, SLEEP);

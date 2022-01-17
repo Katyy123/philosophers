@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 15:13:50 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:05:40 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 /* Libraries */
 # include <stdio.h>
 # include <stdlib.h>
-# include <pthread.h> // for threads
-# include <string.h> // for memset
-# include <unistd.h> // for usleep
-# include <sys/time.h> // for gettimeofday
+# include <pthread.h>
+# include <string.h>
+# include <unistd.h>
+# include <sys/time.h>
 # include <dlfcn.h>
 
 /* Boolean values */
@@ -46,33 +46,30 @@ typedef struct s_philo
 	pthread_t		thread_id;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	*left_fork;
-	int				meals_nb;//number of meals
+	int				meals_nb;
 	long long		last_meal_time;
 	struct s_data	*data;
-	pthread_t		death_thread_id;
-	t_bool			finish;//TRUE when a philo ate m_eat times, if not, FALSE
-	t_bool			is_dead;
-	//pthread_mutex_t	eating;//serve perché se sta mangiando non può morire
+	pthread_t		death_th_id;
+	t_bool			finish;
 }	t_philo;
 
 /* Data in common for all philosophers */
 typedef struct s_data
 {
 	int				philos_nb;
-	int				time_die;//time to die
+	int				time_die;
 	int				time_eat;
 	int				time_sleep;
 	int				times_must_eat;
-	t_bool			dead_philo;//TRUE if 1 philo dies
-	t_bool			all_ate;//inizializzare
-	int				nb_philos_ate;//inizializzare //numero di philos che hanno mangiato times_must_eat times
+	t_bool			dead_philo;
+	t_bool			all_ate;
+	int				nb_philos_ate;
 	pthread_mutex_t	print;
-	pthread_mutex_t	death_meal;//correggere inizializzazione //potrebbe essere non necessario
+	pthread_mutex_t	death_meal;
 	pthread_mutex_t	death_sleep;
 	pthread_mutex_t	death_think;
-	t_philo			*philos_array;
+	t_philo			*phil_arr;
 	long long		start_time;
-	//pthread_t		death_thread_id;
 }	t_data;
 
 /* main.c */
@@ -97,12 +94,11 @@ void		*death_check(void *philo);
 /* philos_activity.c */
 int			activity(t_philo *philo, t_data *data);
 void		ft_eat(t_philo *philo);
-void		all_ate_check(t_data *data);//, t_philo *phil_arr);
+void		all_ate_check(t_data *data);
 
 /* thread_utils.c */
 void		ft_sleep(long long time_in_ms, t_data *data);
 long long	ft_get_time(void);
-//long long	time_diff(long long start, long long end);
 void		print_status(t_data *data, int philo_id, t_status status);
 
 /* end.c */
@@ -117,5 +113,5 @@ int			ft_atoi(const char *str, int *is_toobig);
 int			error(char *message);
 int			error_thread(char *message, int philo_id, t_data *data);
 int			error_mutex(char *message, t_data *data);
-void		*error_thread_null(char *message, int philo_id, t_data *data);
+void		*error_th_null(char *message, int philo_id, t_data *data);
 #endif
