@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:16:48 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 19:38:19 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:06:13 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	all_ate_check(t_data *data)
 void	ft_eat(t_philo *philo)
 {
 	t_data	*data;
+
 	data = philo->data;
 	pthread_mutex_lock(&philo->right_fork);
 	if (data->all_ate == FALSE && data->dead_philo == FALSE)
@@ -61,5 +62,5 @@ int	activity(t_philo *philo, t_data *data)
 		if (data->dead_philo == FALSE && data->all_ate == FALSE)
 			print_status(data, philo->id, THINK);
 	}
-	return (1);		
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:23:44 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 20:02:31 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:03:35 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_data 	data;
-	
+	t_data	data;
+
 	if (argc != 5 && argc != 6)
 		return (error("invalid number of arguments"));
 	else
 	{
 		if (!parsing(argc, argv, &data))
-			return(-1);
+			return (-1);
 		if (!init(&data))
 		{
 			free(data.phil_arr);

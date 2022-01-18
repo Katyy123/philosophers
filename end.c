@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 14:06:09 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 20:10:42 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:02:23 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	destroy_mutexes(t_data *data, t_philo *philo_arr)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < data->philos_nb)
 	{
 		if (pthread_mutex_destroy(&philo_arr[i].right_fork) != 0)
 		{
 			error_thread("fork mut_destroy failed", philo_arr[i].id, data);
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -36,7 +36,7 @@ int	destroy_mutexes(t_data *data, t_philo *philo_arr)
 int	end(t_data *data, t_philo *phil_arr)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < data->philos_nb)
 	{
@@ -45,13 +45,13 @@ int	end(t_data *data, t_philo *phil_arr)
 	}
 	if (data->all_ate == TRUE && data->dead_philo == FALSE)
 	{
-			i = 0;
-			while (i < data->philos_nb)
-			{
-				printf("Philo %d have eaten %d times\n",
-					phil_arr[i].id + 1, phil_arr[i].meals_nb);
-				i++;
-			}
+		i = 0;
+		while (i < data->philos_nb)
+		{
+			printf("Philo %d have eaten %d times\n",
+				phil_arr[i].id + 1, phil_arr[i].meals_nb);
+			i++;
+		}
 	}
 	destroy_mutexes(data, phil_arr);
 	free(phil_arr);

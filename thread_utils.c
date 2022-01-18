@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:24:59 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 20:12:16 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:15:55 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_status(t_data *data, int philo_id, t_status status)
 {
 	pthread_mutex_lock(&data->print);
 	if (data->dead_philo == TRUE)
-		usleep(1000);
+		usleep(10000);
 	if (data->dead_philo == FALSE)
 	{
 		printf("%lli Philo %d ", ft_get_time() - data->start_time,
@@ -38,7 +38,7 @@ void	print_status(t_data *data, int philo_id, t_status status)
 long long	ft_get_time(void)
 {
 	struct timeval	t;
-	
+
 	gettimeofday(&t, NULL);
 	return ((t.tv_sec * 1e3) + (t.tv_usec * 1e-3));
 }

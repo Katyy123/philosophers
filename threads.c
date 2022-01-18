@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:09:53 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 20:07:59 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:07:53 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*death_check(void *void_philo)
 	t_data	*data;
 	t_philo	*philo;
 	int		i;
-	
+
 	philo = (t_philo *)void_philo;
 	data = philo->data;
 	while (data->dead_philo == FALSE && data->all_ate == FALSE)
@@ -63,13 +63,13 @@ void	*death_check(void *void_philo)
 
 void	*thread(void *void_philo)
 {
-	t_data 	*data;
-	t_philo *philo;
-	
+	t_data	*data;
+	t_philo	*philo;
+
 	philo = (t_philo *)void_philo;
 	data = philo->data;
-	if(pthread_create(&philo->death_th_id, NULL, death_check, philo) != 0)
-		return(error_th_null("death th create failed", philo->id, data));
+	if (pthread_create(&philo->death_th_id, NULL, death_check, philo) != 0)
+		return (error_th_null("death th create failed", philo->id, data));
 	if (philo->id % 2 != 0)
 		ft_sleep(data->time_eat / 10, data);
 	while (data->dead_philo == FALSE)
@@ -85,7 +85,7 @@ void	*thread(void *void_philo)
 int	create_threads(t_data *data, t_philo *ph_arr)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < data->philos_nb)
 	{

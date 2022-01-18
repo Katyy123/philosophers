@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 15:35:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2021/12/22 12:58:13 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:04:06 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	check_num(int num, int *is_toobig)
 int	parsing(int argc, char **argv, t_data *data)
 {
 	int	i;
-	int num;
+	int	num;
 	int	*is_toobig;
-	
+
 	i = 1;
 	while (i < argc)
 	{

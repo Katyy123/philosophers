@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 20:05:40 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:57:43 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			set_philo(t_philo *philo, int i, t_data *data);
 int			create_threads(t_data *data, t_philo *phil_arr);
 void		*thread(void *void_philo);
 void		*death_check(void *philo);
+void		is_dead(t_data *data, int i);
+void		fork_mutex_unlock(t_data *data);
 
 /* philos_activity.c */
 int			activity(t_philo *philo, t_data *data);

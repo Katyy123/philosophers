@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/17 20:02:11 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:02:45 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	set_data_2(t_data *data)
 int	init(t_data *data)
 {
 	int	i;
-	
+
 	if (!set_data_2(data))
 		return (0);
 	i = 0;
