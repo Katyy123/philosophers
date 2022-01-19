@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:00:26 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/18 16:02:45 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:23:56 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ int	set_data_2(t_data *data)
 		return (error("print mutex initialization failed"));
 	if (pthread_mutex_init(&data->death_meal, NULL) != 0)
 		return (error("death_meal mutex initialization failed"));
-	if (pthread_mutex_init(&data->death_sleep, NULL) != 0)
-		return (error("death_sleep mutex initialization failed"));
-	if (pthread_mutex_init(&data->death_think, NULL) != 0)
-		return (error("death_think mutex initialization failed"));
 	data->phil_arr = malloc(sizeof(t_philo) * data->philos_nb);
 	if (!data->phil_arr)
 		return (error("phil_arr malloc failed"));

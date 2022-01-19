@@ -6,7 +6,7 @@
 /*   By: cfiliber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:57:30 by cfiliber          #+#    #+#             */
-/*   Updated: 2022/01/18 15:57:43 by cfiliber         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:25:23 by cfiliber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ typedef struct s_data
 	int				nb_philos_ate;
 	pthread_mutex_t	print;
 	pthread_mutex_t	death_meal;
-	pthread_mutex_t	death_sleep;
-	pthread_mutex_t	death_think;
 	t_philo			*phil_arr;
 	long long		start_time;
 }	t_data;
